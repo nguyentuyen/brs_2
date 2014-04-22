@@ -20,7 +20,21 @@ ActiveRecord::Schema.define(version: 20140421095211) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-ActiveRecord::Schema.define(version: 20140421025123) do
+
+  create_table "positions", force: true do |t|
+    t.string   "name"
+    t.string   "short_name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "skills", force: true do |t|
+    t.string   "name"
+    t.integer  "level"
+    t.integer  "num_years"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "name"
