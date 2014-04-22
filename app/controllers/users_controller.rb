@@ -1,8 +1,4 @@
 class UsersController < ApplicationController
-  
-  def show
-    @user = User.find params[:id]
-  end
 
   def new
     @user = User.new
@@ -17,6 +13,29 @@ class UsersController < ApplicationController
       flash[:faild] = "fail"
       render 'new'
     end
+  end
+
+  def show
+    @user = User.find params[:id]
+  end
+
+  def edit
+    @user = User.find params[:id]
+  end
+
+  def update
+    @user = User.find params[:id]
+    if @user.update_attributes(user_params)
+      flash[:success] = "Successful! Profile updated."
+      redirect_to @user
+    else
+      flash[:faild] = "Edit faild"
+      render 'edit'
+    end
+  end
+
+  def index
+    @users = User.paginate(page: params[:page])
   end
 
   private
