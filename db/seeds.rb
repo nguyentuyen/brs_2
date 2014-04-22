@@ -8,3 +8,7 @@ end
   password: "foobar", password_confirmation: "foobar", role: 1)
 end
 
+
+(1..35).each do |i| 
+  Team.create(name: "team#{i}", description: "this is rails app", id_leader: "#{i + 5}")
+end
