@@ -29,4 +29,12 @@ module SessionsHelper
     cookies.delete(:remember_token)
     self.current_user = nil
   end
+
+  def admin_user? user
+    user.role
+  end
+
+  def admin_user
+    current_user.role
+  end
 end
