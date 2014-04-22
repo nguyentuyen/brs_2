@@ -14,7 +14,7 @@ class UsersController < ApplicationController
       flash[:success] = "Create Successful!"
       redirect_to @user
     else
-      flash[:faild] = "faild"
+      flash[:faild] = "fail"
       render 'new'
     end
   end
