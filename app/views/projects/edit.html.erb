@@ -1,0 +1,26 @@
+<% provide(:title, 'Edit Project') %>
+<h1>Edit Project </h1>
+
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for(@project) do |f| %>
+
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+
+      <%= f.label :short_name %>
+      <%= f.text_field :short_name %>
+
+      <%= f.label :start_date %>
+      <%= f.text_field :start_date %>
+
+      <%= f.label :end_date %>
+      <%= f.text_field :end_date %>
+
+      <%= f.label :id_leader %>
+      <%= f.text_field :id_leader %>
+
+      <%= f.submit "Save Changes ", class: "btn btn-large btn-primary" %>
+    <% end %>
+  </div>
+</div>
