@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 20140421095211) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+ActiveRecord::Schema.define(version: 20140421025123) do
 
   create_table "positions", force: true do |t|
     t.string   "name"
