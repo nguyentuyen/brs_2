@@ -4,7 +4,7 @@ class TeamsController < ApplicationController
   end
 
   def index
-    @teams = Team.paginate(page: params[:page])
+    @teams = Team.paginate page: params[:page]
   end
 
   def show

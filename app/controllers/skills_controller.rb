@@ -25,7 +25,7 @@ class SkillsController < ApplicationController
 
   def update
     @skill = Skill.find params[:id]
-    if @skill.update_attributes(skill_params)
+    if @skill.update_attributes skill_params
       flash[:success] = "Successful! Skill updated."
       redirect_to @skill
     else
@@ -39,7 +39,7 @@ class SkillsController < ApplicationController
   end
 
   def destroy
-    Skill.find(params[:id]).destroy
+    Skill.find (params[:id]).destroy
     flash[:success] = "Skill deleted."
     redirect_to skills_url
   end

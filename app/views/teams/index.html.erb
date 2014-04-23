@@ -1,13 +1,13 @@
 <% if signed_in? %>
-	<% provide(:title, 'All teams')%>
-	<h1>All teams</h1>
-	
+  <% provide(:title, 'All teams')%>
+  <h1>All teams</h1>
+  
 
-	<%= will_paginate %>
+  <%= will_paginate %>
 
-	<ul class="teams">
-		<%= render @teams %>
-	</ul>
+  <ul class="teams">
+    <%= render @teams %>
+  </ul>
 
-	<%= will_paginate %>
+  <%= will_paginate %>
 <% end %>
