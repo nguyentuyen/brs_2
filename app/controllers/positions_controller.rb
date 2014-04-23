@@ -9,7 +9,7 @@ class PositionsController < ApplicationController
   end
 
   def destroy
-    Position.find(params[:id]).destroy
+    Position.find (params[:id]).destroy
     flash[:success] = "Position deleted."
     redirect_to positions_path
   end
@@ -38,7 +38,7 @@ class PositionsController < ApplicationController
       flash[:success] = "Create done!"
       redirect_to positions_path
     else
-      redirect_to positions_path
+      render 'new'
     end
   end  
 
