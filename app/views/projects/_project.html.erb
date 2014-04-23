@@ -1,0 +1,13 @@
+<li>
+  <span class="short_name"><%= project.short_name %><span>
+  <span class="name"> <%= project.name %></span>
+</li>
+<li>
+  <span class="start_date"><%= project.start_date %><span>
+  <span class="end_date"> <%= project.end_date %></span>
+
+  <%= link_to "delete", project, method: :delete,
+                                  data: { confirm: "You sure?" } %>
+  <%= link_to "edit", edit_project_path(project.id) %>
+</li>
+

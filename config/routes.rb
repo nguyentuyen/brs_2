@@ -3,6 +3,7 @@ Brs2::Application.routes.draw do
   resources :sessions, only: [:new, :create, :destroy]
   resources :positions
   resources :teams
+  resources :projects
   namespace :admin do
   	match "/signin", to: "sessions#new", via: "get"
     match "/signout", to: "sessions#destroy", via: "delete"
