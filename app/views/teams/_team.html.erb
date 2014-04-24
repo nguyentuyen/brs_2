@@ -1,5 +1,9 @@
 <li>
   <%= link_to team.name, team %>
   <h5>Description: <%= team.description %></h5>
-    <h5>id_leader  : <%= team.id_leader %></h5>
+   <h5>id_leader  : <%= team.id_leader %></h5>
+   <% if admin_user? current_user %>
+    | <%= link_to "edit", edit_team_path(team.id) %>
+    | <%= link_to "delete", team, method: :delete, data: { confirm: "You sure?" } %>
+  <% end %>
 </li>
