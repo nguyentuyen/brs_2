@@ -15,6 +15,14 @@
       <%= f.label :email %>
       <%= f.text_field :email %>
 
+      <%= f.label :team %>
+      <%= f.collection_select(:team, Team.all, :id, :name, prompt: "Select please") %>
+
+      <%= f.label :position %>
+      <%= f.collection_select(:position, Position.all, :id, :name, prompt: "Select please") %>
+
+      <%= f.label :user_project, "Projects joined" %>
+      
       <%= f.label :password %>
       <%= f.password_field :password %>
 

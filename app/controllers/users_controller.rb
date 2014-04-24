@@ -6,6 +6,10 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
+    @projects = Project.all
+    @projects.each do |project|
+      @user.user_projects.build project_id: project.id
+    end
   end
 
   def create
