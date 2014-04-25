@@ -1,6 +1,11 @@
 <% provide(:title, 'All members') %>
 <h1>All members</h1>
 
+<%= form_tag import_users_path, multipart: true do %>
+  <%= file_field_tag :file %>
+  <%= submit_tag "Import" %>
+<% end %>
+
 <%= will_paginate %>
 
 <ul class="users">
