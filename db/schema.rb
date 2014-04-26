@@ -22,17 +22,6 @@ ActiveRecord::Schema.define(version: 20140428041952) do
     t.datetime "updated_at"
   end
 
-  create_table "activity_logs", force: true do |t|
-    t.datetime "time"
-    t.string   "action"
-    t.string   "user_id"
-    t.string   "integer"
-    t.string   "description"
-    t.string   "text"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "positions", force: true do |t|
     t.string   "name"
     t.string   "short_name"

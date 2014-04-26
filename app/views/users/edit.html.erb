@@ -1,10 +1,11 @@
-<% provide(:title, "Edit user") %>
-<h1>Update member's profile</h1>
+<% provide(:title, 'Edit member') %>
+<h1>Edit member</h1>
 
 <div class="row">
   <div class="span6 offset3">
-    <%= form_for(@user) do |f| %>
-      
+    <%= form_for(@user), method: :patch do |f| %>
+      <%= render 'shared/error_messages' %>
+
       <%= f.label :name %>
       <%= f.text_field :name %>
 
@@ -20,7 +21,42 @@
       <%= f.label :password_confirmation, "Confirmation" %>
       <%= f.password_field :password_confirmation %>
 
-      <%= f.submit "Save changes", class: "btn btn-large btn-primary" %>
+      <%= f.label :team %>
+      <%= f.collection_select(:team_id, Team.all, :id, :name, prompt: "Select please") %>
+
+      <%= f.label :position %>
+      <%= f.collection_select(:position_id, Position.all, :id, :name, prompt: "Select please") %>
+
+     <%= f.label :project, "Projects joined" %>
+      <% for project in @projects %>
+        <%= check_box_tag "user[project_ids][]", project.id %>
+        <%= project.name %>
+      <% end %>
+
+      <%= f.label :skill %>
+      <table style="text-align: center" border="1">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Skill Name</th>
+            <th>Skill Level</th>
+            <th>Used year number</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= f.fields_for :user_skills, @user.user_skills do |builder| %>
+            <tr>
+              <td><%= builder.check_box :skill_id, {checked: !builder.object.skill.id.present? }, 
+                builder.object.skill.id, ""%></td>
+              <td><%= builder.object.skill.try(:name) %></td>
+              <td><%= builder.text_field :level %></td>
+              <td><%= builder.text_field :num_year %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      
+      <%= f.submit "Submit", class: "btn btn-large btn-primary" %>
     <% end %>
   </div>
 </div>
