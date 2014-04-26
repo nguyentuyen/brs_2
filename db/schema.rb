@@ -53,8 +53,10 @@ ActiveRecord::Schema.define(version: 20140424070330) do
   end
 
   create_table "user_skills", force: true do |t|
-    t.integer  "skill_id"
     t.integer  "user_id"
+    t.integer  "skill_id"
+    t.integer  "level"
+    t.integer  "num_year"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
