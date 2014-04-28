@@ -10,6 +10,9 @@ Brs2::Application.routes.draw do
     match "/signout", to: "sessions#destroy", via: "delete"
   	resources "sessions", only: [:new, :create, :destroy]
   	resources "users"
+    match "csvs", to: "csvs#index", via: :get
+    match "csvs/import", to: "csvs#import", via: :post
+    match "csvs/export", to: "csvs#export", via: :get
   end
   root "static_pages#home"
   match "/help", to: "static_pages#help", via: "get"
