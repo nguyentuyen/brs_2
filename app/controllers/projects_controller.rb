@@ -9,7 +9,9 @@ class ProjectsController < ApplicationController
   end
 
   def destroy
-    Project.find(params[:id]).destroy
+    project= Project.find(params[:id]).destroy
+    Activity.create( time: Time.now, action: " Delete Project", 
+                       user: current_user.id, description: project.name)
     flash[:success] = "project deleted."
     redirect_to projects_path
   end
@@ -25,6 +27,8 @@ class ProjectsController < ApplicationController
   def update
     @project = Project.find params[:id]
     if @project.update_attributes project_params
+      Activity.create( time: Time.now, action: " Delete Project", 
+                       user: current_user.id, description: @project.name)
       flash[:success] = "Update done!"
       redirect_to projects_path
     else
@@ -35,7 +39,8 @@ class ProjectsController < ApplicationController
   def create
     @project = Project.new project_params
     if @project.save
-      flash[:success] = "Create done!"
+      Activity.create( time: Time.now, action: " Create Project", 
+                       user: current_user.id, description: @project.name)
       redirect_to projects_path
     else
       render 'new'

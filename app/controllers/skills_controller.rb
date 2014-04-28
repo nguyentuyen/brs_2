@@ -15,7 +15,9 @@ class SkillsController < ApplicationController
 
   def create
     @skill = Skill.new skill_params
-    if @skill.save 
+    if @skill.save
+      Activity.create( time: Time.now, action: "Create Skill", 
+                                user: current_user.id, description: @skill.name)
       flash[:success] = "Create Successful!"
       redirect_to @skills
     else
@@ -31,6 +33,8 @@ class SkillsController < ApplicationController
   def update
     @skill = Skill.find params[:id]
     if @skill.update_attributes skill_params
+      Activity.create( time: Time.now, action: "Update Skill", 
+                                user: current_user.id, description: @skill.name)
       flash[:success] = "Successful! Skill updated."
       redirect_to @skill
     else
@@ -40,7 +44,10 @@ class SkillsController < ApplicationController
   end
 
   def destroy
-    Skill.find (params[:id]).destroy
+    skill= Skill.find(params[:id])
+    Activity.create( time: Time.now, action: "Deleted Skill", 
+                                user: current_user.id, description: skill.name)
+    skill.destroy
     flash[:success] = "Skill deleted."
     redirect_to skills_url
   end

@@ -1,0 +1,9 @@
+<li>
+  <span class="time"><%= activity.time %><span>
+  <span class="action"> <%= activity.action %></span>	done by
+  <%= link_to User.find(activity.user).name , User.find(activity.user)%>
+
+  <span class="description"> <%= activity.description %></span>
+  <%= link_to "delete", activity, method: :delete,
+                                  data: { confirm: "You sure?" } %>
+</li>

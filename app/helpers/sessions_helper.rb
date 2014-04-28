@@ -23,6 +23,9 @@ module SessionsHelper
   end
 
   def sign_out
+    a = Activity.create( time: Time.now, action: "Sign out", 
+                                user: current_user.id, description: current_user.name)
+    a.save
     current_user.not_validate_password = true
     current_user.update_attributes(remember_token: User.digest(User.new_remember_token))
     current_user.not_validate_password = false

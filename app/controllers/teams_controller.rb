@@ -15,6 +15,8 @@ class TeamsController < ApplicationController
     @team = Team.find params[:id]
     if @team.update_attributes(team_params)
       flash[:success] = "Successful! Team updated."
+      Activity.create( time: Time.now, action: "Update Team", 
+                                user: current_user.id, description: @team.name)
       redirect_to @team
     else
       flash[:faild] = "Edit faild"
@@ -31,6 +33,8 @@ class TeamsController < ApplicationController
     @team = Team.new team_params
     if @team.save
       flash[:success] = "Create a new team success!"
+      Activity.create( time: Time.now, action: "Create Team", 
+                                user: current_user.id, description: @team.name)
       redirect_to @team
     else
       render 'new'
@@ -40,8 +44,12 @@ class TeamsController < ApplicationController
 
 
   def destroy
-    Team.find (params[:id]).destroy
+    team = Team.find (params[:id])
+    Activity.create( time: Time.now, action: "Delete Team", 
+                                user: current_user.id, description: team.name)
+    team.destroy
     flash[:success] = "Team deleted."
+
     redirect_to teams_url
   end
 

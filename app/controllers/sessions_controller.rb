@@ -8,6 +8,8 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:session][:password])
       flash[:success] = "sign in success!"
       sign_in user
+      Activity.create( time: Time.now, action: "Sign In", 
+                                user: current_user.id, description: user.name)
       redirect_to user
     else
       flash.now[:error] = 'Invalid email/password combination'
