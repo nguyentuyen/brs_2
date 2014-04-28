@@ -9,7 +9,10 @@ class PositionsController < ApplicationController
   end
 
   def destroy
-    Position.find (params[:id]).destroy
+    position= Position.find(params[:id])
+    Activity.create( time: position.created_at, action: " Delete Position", 
+                       user: current_user.id, description: position.name)
+    position.destroy
     flash[:success] = "Position deleted."
     redirect_to positions_path
   end
@@ -25,6 +28,8 @@ class PositionsController < ApplicationController
   def update
     @position = Position.find params[:id]
     if @position.update_attributes position_params
+      Activity.create( time: @position.created_at, action: " Update Position", 
+                       user: current_user.id, description: @position.name)
       flash[:success] = "Update done!"
       redirect_to positions_path
     else
@@ -37,6 +42,8 @@ class PositionsController < ApplicationController
     if @position.save
       flash[:success] = "Create done!"
       redirect_to positions_path
+      Activity.create( time: @position.created_at, action: " Create Position", 
+                       user: current_user.id, description: @position.name)
     else
       render 'new'
     end

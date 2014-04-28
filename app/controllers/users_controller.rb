@@ -40,6 +40,8 @@ class UsersController < ApplicationController
         @user_skill.skill_id = skill_id
         @user_skill.save
       end
+      Activity.create( time: Time.now, action: "Create User", 
+                                user: @user.id, description: @user.name)
       flash[:success] = "Create Successful!"
       redirect_to @user
     else
@@ -56,6 +58,8 @@ class UsersController < ApplicationController
     @user = User.find params[:id]
     if @user.update_attributes(user_params)
       flash[:success] = "Successful! Profile updated."
+      Activity.create( time: Time.now, action: "Update User", 
+                                user: @user.id, description: @user.name)
       redirect_to @user
     else
       flash[:faild] = "Edit faild"
@@ -68,7 +72,10 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    User.find (params[:id]).destroy
+    user = User.find (params[:id])
+    Activity.create( time: Time.now, action: "Deleted Users", 
+                                user: user.id, description: user.name)
+    user.destroy
     flash[:success] = "User deleted."
     redirect_to users_url
   end

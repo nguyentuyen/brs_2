@@ -5,6 +5,7 @@ Brs2::Application.routes.draw do
   resources :teams
   resources :projects
   resources :skills
+  resources :activities
   namespace :admin do
   	match "/signin", to: "sessions#new", via: "get"
     match "/signout", to: "sessions#destroy", via: "delete"
