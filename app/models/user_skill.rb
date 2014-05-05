@@ -1,6 +1,5 @@
 class UserSkill < ActiveRecord::Base
+  attr_accessor :skill_checked
   belongs_to :user
   belongs_to :skill
-  validates :user_id, presence: true
-  validates :skill_id, presence: true
 end

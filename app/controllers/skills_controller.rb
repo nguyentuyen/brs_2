@@ -44,11 +44,11 @@ class SkillsController < ApplicationController
   end
 
   def destroy
-    skill= Skill.find(params[:id])
+   skill= Skill.find(params[:id])
     Activity.create( time: Time.now, action: "Deleted Skill", 
                                 user: current_user.id, description: skill.name)
     skill.destroy
-    flash[:success] = "Skill deleted."
+   flash[:success] = "Skill deleted."
     redirect_to skills_url
   end
 

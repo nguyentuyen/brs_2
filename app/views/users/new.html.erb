@@ -15,30 +15,47 @@
       <%= f.label :email %>
       <%= f.text_field :email %>
 
-      <%= f.label :team %>
-      <%= f.collection_select(:team_id, Team.all, :id, :name, prompt: "Select please") %>
-
-      <%= f.label :position %>
-      <%= f.collection_select(:position_id, Position.all, :id, :name, prompt: "Select please") %>
-
-      <%= f.label :project, "Projects joined" %>
-      <% for project in @projects %>
-        <%= check_box_tag "project_ids[]", project.id %>
-        <%= project.name %>
-      <% end %>
-
-      <%= f.label :skill, "Skill" %>
-      <% for skill in @skills %>
-        <%= check_box_tag "skill_ids[]", skill.id %>
-        <%= skill.name %><br>
-      <% end %>
-      
       <%= f.label :password %>
       <%= f.password_field :password %>
 
       <%= f.label :password_confirmation, "Confirmation" %>
       <%= f.password_field :password_confirmation %>
 
+      <%= f.label :team %>
+      <%= f.collection_select(:team_id, Team.all, :id, :name, prompt: "Select please") %>
+
+      <%= f.label :position %>
+      <%= f.collection_select(:position_id, Position.all, :id, :name, prompt: "Select please") %>
+
+     <%= f.label :project, "Projects joined" %>
+      <% for project in @projects %>
+        <%= check_box_tag "user[project_ids][]", project.id %>
+        <%= project.name %>
+      <% end %>
+
+      <%= f.label :skill %>
+      <table style="text-align: center" border="1">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Skill Name</th>
+            <th>Skill Level</th>
+            <th>Used year number</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= f.fields_for :user_skills, @user.user_skills do |builder| %>
+            <tr>
+              <td><%= builder.check_box :skill_id, {checked: !builder.object.skill.id.present? }, 
+                builder.object.skill.id, ""%></td>
+              <td><%= builder.object.skill.try(:name) %></td>
+              <td><%= builder.text_field :level %></td>
+              <td><%= builder.text_field :num_year %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      
       <%= f.submit "Create member", class: "btn btn-large btn-primary" %>
     <% end %>
   </div>
