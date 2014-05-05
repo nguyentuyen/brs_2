@@ -1,0 +1,40 @@
+<%= form_tag admin_members_path, method: "patch" do %>
+  <div class="row">
+    <div class="span4"> 
+      <h3>Members of team <%= getTeamId %></h3>
+      <% @users.each do |user| %>
+        <% if user.team_id == getTeamId %>
+          <%= check_box_tag "member_ids[]", user.id %>
+          <%= link_to user.name, user %>
+          <br>
+        <% end %>
+      <% end %>
+    </div>
+    <aside class="span4">
+      <h3>All teams</h3>
+      <% @teams.each do |team|%>
+        <% if team.id != getTeamId %>
+          <li><%= link_to team.name, team %></li>
+          <% @users.each do |user| %>
+            <% if user.team_id == team.id %>
+              <%= check_box_tag "member_ids[]", user.id %>
+              <%= link_to user.name, user %>
+              <br>
+            <% end %>
+          <% end %>
+        <% end %>
+      <% end %>
+    </aside>
+    <aside class="span4">
+      <h3>Members with no teams</h3>
+      <% @users.each do |user| %>
+        <% if user.team_id.nil? %>
+          <%= check_box_tag "member_ids[]", user.id %>
+          <%= link_to user.name, user %>
+          <br>
+        <% end %>
+      <% end %>
+    </aside>
+  </div>
+  <%= submit_tag "Update members", class: "btn btn-primary" %>
+<% end %>
