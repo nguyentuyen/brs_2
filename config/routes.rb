@@ -6,6 +6,7 @@ Brs2::Application.routes.draw do
   resources :projects
   resources :skills
   resources :activities
+  resources :reports
   namespace :admin do
   	match "/signin", to: "sessions#new", via: "get"
     match "/signout", to: "sessions#destroy", via: "delete"
@@ -19,7 +20,7 @@ Brs2::Application.routes.draw do
   root "static_pages#home"
   match "/help", to: "static_pages#help", via: "get"
   match "/about", to: "static_pages#about", via: "get"
-  match "/contact", to: "static_pages#contact", via: "get" 
+  match "/contact", to: "static_pages#contact", via: "get"
   match "/signin",  to: "sessions#new",         via: "get"
   match "/signout", to: "sessions#destroy",     via: "delete"
 end
